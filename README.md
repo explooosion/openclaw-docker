@@ -48,15 +48,8 @@ docker compose up -d
 
 ## 文檔
 
-### 核心文檔
-- **[OpenClaw 核心價值](./docs/OPENCLAW_VALUE_PROPOSITION.md)** ⭐ 必讀！了解 OpenClaw 的真正意義
 - **[系統架構文檔](./docs/ARCHITECTURE.md)** - 深入了解系統設計、組件和網路流程
-- **[完整部署指南](./docs/SETUP.md)** - 詳細的安裝步驟、設定說明和故障排除
-
-### AI 整合指南
-- **[Gemini 設定指南](./docs/GEMINI_SETUP.md)** - Google Gemini CLI 安裝與設定
-- **[Gemini Web Chat](./docs/GEMINI_WEB_CHAT.md)** - 獨立 Web 界面使用說明
-- **[Chat 功能對比](./docs/CHAT_WITH_GEMINI.md)** - OpenClaw vs Gemini Web 比較
+- **[設備配對指南](./docs/DEVICE_PAIRING.md)** - 詳細的設備認證流程
 
 ## 主要特性
 
@@ -96,7 +89,7 @@ docker compose up -d telegram-bot
 - ✅ 獨立 Session 管理（每用戶獨立對話歷史）
 - ✅ 指令系統（/start, /help, /status, /clear）
 
-📚 **完整教學**：[Telegram Bot 設定指南](./docs/TELEGRAM_SETUP.md)
+
 
 ### 🎁 擴充 Skills（一鍵安裝）
 
@@ -113,9 +106,7 @@ docker compose up -d telegram-bot
 ./scripts/update-skills.sh
 ```
 
-📚 **詳細說明**：
-- [Skills 管理指南](./docs/SKILLS_MANAGEMENT.md) - Skills 安裝、更新和設定
-- [Skills 整合報告](./docs/SKILLS_INTEGRATION_REPORT.md) - 已整合 Skills 詳情
+
 
 ### AI 能力
 - ✅ **雙 AI 引擎**: Anthropic Claude + Google Gemini
@@ -272,7 +263,7 @@ sleep 90  # 等待啟動
 docker exec openclaw_gateway gemini "你好"
 ```
 
-詳細設定請參考 [GEMINI_SETUP.md](./docs/GEMINI_SETUP.md)。
+
 
 ## 連接埠說明
 
@@ -324,15 +315,7 @@ docker exec openclaw_gateway openclaw devices list
 docker exec openclaw_gateway openclaw devices approve <REQUEST_ID>
 ```
 
-更多故障排除方法請參考 [SETUP.md](./docs/SETUP.md#常見問題排查)。
 
-## 許可證
-
-[指定你的許可證]
-
-## 貢獻
-
-歡迎提交 Issue 和 Pull Request！
 
 ## 相關資源
 
@@ -341,13 +324,4 @@ docker exec openclaw_gateway openclaw devices approve <REQUEST_ID>
 - [Google AI Studio](https://aistudio.google.com/) - 獲取 Gemini API Key
 - [ClawHub](https://clawhub.com/) - OpenClaw Skills 市場
 
-## 完整文檔
 
-- 📖 [系統架構](./docs/ARCHITECTURE.md) - 詳細技術架構和組件說明
-- 🚀 [部署指南](./docs/SETUP.md) - 完整安裝步驟和設定指南
-- ⚡ [快速參考](./docs/QUICK_REFERENCE.md) - 常用命令速查
-- 🤖 [Gemini AI 設定](./docs/GEMINI_SETUP.md) - Gemini 詳細設定和使用
-- 📁 [文件清單](./docs/FILES.md) - 項目文件說明
-- 🤝 [貢獻指南](./docs/CONTRIBUTING.md) - 如何參與項目
-- 📋 [發布檢查清單](./docs/PUBLISH_CHECKLIST.md) - GitHub 發布準備
-- [Docker Compose 文檔](https://docs.docker.com/compose/)
