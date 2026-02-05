@@ -1,0 +1,110 @@
+{
+  "gateway": {
+    "mode": "local",
+    "bind": "loopback",
+    "port": 18789,
+    "trustedProxies": ["127.0.0.1", "0.0.0.0/0", "::/0"],
+    "auth": {
+      "mode": "token",
+      "token": "${OPENCLAW_GATEWAY_TOKEN}"
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "anthropic/claude-3-haiku-20240307",
+        "fallbacks": [
+          "google/gemini-2.0-flash-exp",
+          "openai/gpt-3.5-turbo"
+        ]
+      },
+      "imageModel": {
+        "primary": "anthropic/claude-3-5-sonnet-20241022",
+        "fallbacks": ["google/gemini-2.0-flash-exp"]
+      },
+      "models": {
+        "anthropic/claude-3-haiku-20240307": {
+          "alias": "Haiku",
+          "params": {"supportsImages": true}
+        },
+        "anthropic/claude-3-5-sonnet-20241022": {
+          "alias": "Sonnet",
+          "params": {"supportsImages": true}
+        },
+        "anthropic/claude-opus-4-5": {
+          "alias": "Opus",
+          "params": {"supportsImages": true}
+        },
+        "google/gemini-2.0-flash-exp": {
+          "alias": "Gemini Flash",
+          "params": {"supportsImages": true}
+        },
+        "google/gemini-1.5-pro": {
+          "alias": "Gemini Pro",
+          "params": {"supportsImages": true}
+        },
+        "openai/gpt-3.5-turbo": {
+          "alias": "GPT-3.5",
+          "params": {
+            "supportsImages": false,
+            "contextWindow": 16385
+          }
+        },
+        "openai/gpt-4o": {
+          "alias": "GPT-4o",
+          "params": {
+            "supportsImages": true,
+            "contextWindow": 128000
+          }
+        }
+      },
+      "workspace": "/root/.openclaw/workspace",
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      },
+      "contextPruning": {
+        "mode": "cache-ttl",
+        "ttl": "1h"
+      },
+      "heartbeat": {
+        "every": "30m"
+      },
+      "compaction": {
+        "mode": "safeguard"
+      }
+    }
+  },
+  "auth": {
+    "order": {
+      "anthropic": ["anthropic:default"],
+      "google": ["google:default"],
+      "openai": ["openai:default"]
+    }
+  },
+  "channels": {
+    "telegram": {
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "allowFrom": [479077329],
+      "groups": {
+        "*": {
+          "requireMention": true
+        }
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true
+      }
+    }
+  },
+  "meta": {
+    "lastTouchedVersion": "2026.2.3-1",
+    "lastTouchedAt": "2026-02-05T12:05:00.000Z"
+  }
+}

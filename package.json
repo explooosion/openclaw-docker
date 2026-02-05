@@ -1,0 +1,59 @@
+{
+  "name": "openclaw-docker-infra",
+  "version": "1.0.0",
+  "description": "OpenClaw AI Assistant Docker deployment with multi-provider support",
+  "author": "explooosion",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/explooosion/openclaw-docker-infra.git"
+  },
+  "bugs": {
+    "url": "https://github.com/explooosion/openclaw-docker-infra/issues"
+  },
+  "homepage": "https://github.com/explooosion/openclaw-docker-infra#readme",
+  "keywords": [
+    "openclaw",
+    "ai-assistant",
+    "docker",
+    "telegram-bot",
+    "anthropic-claude",
+    "google-gemini",
+    "openai",
+    "skills",
+    "traefik"
+  ],
+  "scripts": {
+    "start": "docker compose up -d",
+    "stop": "docker compose down",
+    "restart": "docker compose restart openclaw",
+    "logs": "docker compose logs -f openclaw",
+    "logs:all": "docker compose logs -f",
+    "logs:traefik": "docker logs -f traefik",
+    "logs:telegram": "docker logs openclaw_gateway 2>&1 | grep telegram | tail -20",
+    "status": "docker compose ps",
+    "build": "docker compose build",
+    "rebuild": "docker compose down && docker compose build --no-cache && docker compose up -d",
+    "clean": "docker compose down -v",
+    "shell": "docker exec -it openclaw_gateway sh",
+    "devices:list": "docker exec openclaw_gateway openclaw devices list",
+    "devices:approve": "docker exec openclaw_gateway openclaw devices approve",
+    "gateway:status": "docker exec openclaw_gateway openclaw gateway status",
+    "skills:list": "docker exec openclaw_gateway openclaw skills list",
+    "skills:install": "docker exec openclaw_gateway openclaw skills install",
+    "test:telegram": "docker logs openclaw_gateway 2>&1 | grep -i telegram",
+    "health": "curl -f http://localhost:18789/__openclaw__/health || echo 'Gateway not responding'",
+    "setup:certs": "mkdir -p certs && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout certs/local-key.pem -out certs/local-cert.pem -subj '/C=TW/ST=Taiwan/L=Taipei/O=Local/OU=Dev/CN=openclaw.local' && chmod 600 certs/local-key.pem",
+    "setup:hosts": "echo '127.0.0.1 openclaw.local' | sudo tee -a /etc/hosts",
+    "setup:env": "test -f .env || cp .env.example .env && echo 'Please edit .env file with your API keys'",
+    "setup": "npm run setup:env && npm run setup:certs && npm run setup:hosts",
+    "validate:config": "docker exec openclaw_gateway cat /root/.openclaw/agents/main/agent/auth-profiles.json | jq .",
+    "validate:telegram": "docker exec openclaw_gateway cat /root/.openclaw/openclaw.json | jq .channels.telegram"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

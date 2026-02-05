@@ -1,0 +1,32 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "OpenWeatherMap 天气查询",
+  "author": "OpenClaw Team",
+  "license": "MIT",
+  "keywords": ["weather", "openweathermap", "天气"],
+  "requirements": {
+    "binaries": ["curl", "python3"],
+    "env": ["OPENWEATHER_API_KEY"]
+  },
+  "commands": {
+    "weather": {
+      "path": "./weather.sh",
+      "description": "查询城市天气",
+      "usage": "weather <city_name>",
+      "examples": [
+        "weather taipei",
+        "weather tokyo",
+        "weather \"new york\""
+      ]
+    }
+  },
+  "triggers": {
+    "patterns": [
+      "天气",
+      "weather",
+      "温度",
+      "temperature"
+    ]
+  }
+}

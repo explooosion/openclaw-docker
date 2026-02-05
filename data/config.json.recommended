@@ -1,0 +1,151 @@
+{
+  "gateway": {
+    "mode": "local",
+    "bind": "loopback",
+    "port": 18789,
+    "trustedProxies": ["127.0.0.1", "0.0.0.0/0", "::/0"],
+    "auth": {
+      "mode": "token",
+      "token": "${OPENCLAW_GATEWAY_TOKEN}"
+    }
+  },
+  
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "openai/gpt-3.5-turbo",
+        "fallbacks": [
+          "anthropic/claude-3-5-haiku-20241022",
+          "google/gemini-2.0-flash-exp"
+        ]
+      },
+      "imageModel": {
+        "primary": "anthropic/claude-3-5-sonnet-20241022",
+        "fallbacks": [
+          "google/gemini-2.0-flash-exp"
+        ]
+      },
+      "models": {
+        "anthropic/claude-3-5-haiku-20241022": {
+          "alias": "Haiku",
+          "description": "Fast and economical"
+        },
+        "anthropic/claude-3-5-sonnet-20241022": {
+          "alias": "Sonnet",
+          "description": "Balanced performance"
+        },
+        "anthropic/claude-opus-4-5": {
+          "alias": "Opus",
+          "description": "Most capable"
+        },
+        "google/gemini-2.0-flash-exp": {
+          "alias": "Gemini Flash",
+          "description": "Free and fast"
+        },
+        "google/gemini-1.5-pro": {
+          "alias": "Gemini Pro",
+          "description": "Free, high quality"
+        },
+        "openai/gpt-3.5-turbo": {
+          "alias": "GPT-3.5",
+          "description": "Lightest OpenAI"
+        },
+        "openai/gpt-4o": {
+          "alias": "GPT-4o",
+          "description": "Multimodal"
+        }
+      },
+      "workspace": "/root/.openclaw/workspace",
+      "skills": {
+        "enabled": true,
+        "mode": "hybrid",
+        "workspace": "/root/.openclaw/workspace/skills",
+        "clawhub": {
+          "enabled": true,
+          "autoInstall": false
+        }
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      },
+      "contextPruning": {
+        "mode": "cache-ttl",
+        "ttl": "1h"
+      },
+      "heartbeat": {
+        "every": "30m"
+      },
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "sandbox": {
+        "mode": "non-main",
+        "allow": [
+          "bash",
+          "process",
+          "read",
+          "write",
+          "edit",
+          "sessions_list",
+          "sessions_history",
+          "sessions_send"
+        ],
+        "deny": [
+          "browser",
+          "canvas",
+          "nodes",
+          "cron",
+          "discord",
+          "gateway"
+        ]
+      }
+    }
+  },
+  
+  "auth": {
+    "order": {
+      "anthropic": ["anthropic:default"],
+      "google": ["google:default"],
+      "openai": ["openai:default"]
+    },
+    "cooldowns": {
+      "billingBackoffHours": 5,
+      "billingMaxHours": 24,
+      "failureWindowHours": 24
+    }
+  },
+  
+  "channels": {
+    "telegram": {
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "dm": {
+        "policy": "pairing",
+        "allowFrom": []
+      },
+      "groups": {
+        "*": {
+          "requireMention": true,
+          "activation": "mention"
+        }
+      }
+    }
+  },
+  
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true
+      }
+    }
+  },
+  
+  "meta": {
+    "lastTouchedVersion": "2026.2.3-1",
+    "lastTouchedAt": "2026-02-05T09:16:27.546Z"
+  }
+}

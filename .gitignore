@@ -1,0 +1,86 @@
+# 環境變量配置（包含敏感信息）
+.env
+.env.local
+
+# TLS 證書和私鑰
+certs/
+*.pem
+*.crt
+*.key
+# 保留目錄結構說明
+!certs/.gitkeep
+!certs/README.md
+
+# OpenClaw 數據目錄（包含敏感配置和憑證）
+data/credentials.json
+data/credentials/*.json
+data/config.json
+data/openclaw.json
+data/update-check.json
+
+# 保留 credentials 示例文件
+!data/credentials/*.example
+
+# Google Workspace Configuration (gog CLI)
+gog-config/
+# 保留目錄結構說明
+!gog-config/.gitkeep
+!gog-config/README.md
+
+# Skills 目錄（用戶自訂）
+!skills-custom/README.md
+skills-custom/
+# 保留目錄結構
+!skills-custom/.gitkeep
+
+# Agent 數據（用戶特定）
+data/agents/*/agent/auth-profiles.json
+data/agents/*/agent/models.json
+data/agents/*/agent/USER.md
+data/agents/*/sessions/
+
+# Device 配對和身份（本地狀態）
+data/devices/
+data/identity/
+
+# Cron 任務數據（用戶特定）
+data/cron/jobs.json
+data/cron/runs/
+
+# Telegram 運行時數據（更新偏移量）
+data/telegram/
+
+# Memory 數據庫（用戶會話記憶）
+data/memory/
+
+# OpenClaw 日誌
+data/logs/
+*.log
+
+# 臨時文件和緩存
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Docker volumes 和臨時文件
+docker-compose.override.yml
+.dockerignore
+
+# 備份文件
+*.backup
+*.bak
+*.bak.*
+*.old
+*.tar.gz
+backup/
+
+# Node modules（如果在本地開發）
+node_modules/
+npm-debug.log*
+
+# 系統文件
+Thumbs.db
+ehthumbs.db

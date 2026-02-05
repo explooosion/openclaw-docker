@@ -1,0 +1,31 @@
+{
+  "name": "qrcode",
+  "version": "1.0.0",
+  "description": "QR Code 二维码生成器",
+  "author": "OpenClaw Team",
+  "license": "MIT",
+  "keywords": ["qrcode", "二维码", "barcode"],
+  "requirements": {
+    "binaries": ["qrencode"]
+  },
+  "commands": {
+    "qrcode": {
+      "path": "./qrcode.sh",
+      "description": "生成二维码",
+      "usage": "qrcode <text> [output_path]",
+      "examples": [
+        "qrcode https://example.com",
+        "qrcode \"Hello World\" /tmp/qr.png"
+      ]
+    }
+  },
+  "triggers": {
+    "patterns": [
+      "二维码",
+      "qr code",
+      "qrcode",
+      "生成二维码",
+      "制作 qr"
+    ]
+  }
+}
