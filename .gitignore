@@ -33,6 +33,17 @@ skills-custom/
 # 保留目錄結構
 !skills-custom/.gitkeep
 
+# OpenClaw Workspace Skills 管理
+data/workspace/skills/bundled/
+data/workspace/skills/managed/
+data/workspace/skills/custom/
+data/workspace/skills/{bundled,managed,custom}/
+
+# 保留預配置的示例 Skills
+!data/workspace/skills/weather/
+!data/workspace/skills/qrcode/
+!data/workspace/skills/README.md
+
 # Agent 數據（用戶特定）
 data/agents/*/agent/auth-profiles.json
 data/agents/*/agent/models.json

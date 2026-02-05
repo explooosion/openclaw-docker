@@ -44,6 +44,7 @@ services:
       # Skills 配置
       - GITHUB_TOKEN=${GITHUB_TOKEN:-}
       - NOTION_API_KEY=${NOTION_API_KEY:-}
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY:-}
       # Google Workspace
       - GOG_KEYRING_PASSWORD=${GOG_KEYRING_PASSWORD:-}
       - GOG_ACCOUNT=${GOG_ACCOUNT:-}
