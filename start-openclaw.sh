@@ -163,4 +163,24 @@ for i in $(seq 1 30); do
 done
 
 echo "Starting socat proxy: 0.0.0.0:18790 -> 127.0.0.1:18789"
-exec socat TCP-LISTEN:18790,fork,reuseaddr,bind=0.0.0.0 TCP:127.0.0.1:18789
+socat TCP-LISTEN:18790,fork,reuseaddr,bind=0.0.0.0 TCP:127.0.0.1:18789 &
+SOCAT_PID=$!
+
+echo "Services started:"
+echo "  OpenClaw Gateway PID: $OPENCLAW_PID"
+echo "  Socat Proxy PID: $SOCAT_PID"
+echo ""
+echo "Access points:"
+echo "  Internal: http://localhost:18789/__openclaw__/canvas/"
+echo "  External: http://localhost:18790/__openclaw__/canvas/"
+echo ""
+
+# Keep container running and forward signals
+cleanup() {
+    echo "Shutting down services..."
+    kill $OPENCLAW_PID $SOCAT_PID 2>/dev/null
+    exit 0
+}
+
+trap cleanup TERM INT
+wait

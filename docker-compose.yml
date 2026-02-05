@@ -54,9 +54,9 @@ services:
       - CF_TUNNEL_TOKEN=${CF_TUNNEL_TOKEN:-}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.openclaw.rule=Host(`openclaw.local`) || Host(`localhost`)"
-      - "traefik.http.routers.openclaw.entrypoints=websecure" # 強制走 HTTPS
-      - "traefik.http.routers.openclaw.tls=true" # 啟用 TLS
+      - "traefik.http.routers.openclaw.rule=Host(`openclaw.local`) || Host(`localhost`) || Host(`openclaw.robby570.tw`)"
+      - "traefik.http.routers.openclaw.entrypoints=web,websecure"
+      - "traefik.http.routers.openclaw.tls=false"
       - "traefik.http.services.openclaw.loadbalancer.server.port=18790"
     command: /start-openclaw.sh
     restart: unless-stopped
@@ -80,18 +80,18 @@ services:
   #   depends_on:
   #     - openclaw
 
-  # Cloudflare Tunnel - 安全遠端訪問（按需啟動）
-  # cloudflared:
-  #   image: cloudflare/cloudflared:latest
-  #   container_name: cf_tunnel
-  #   command: tunnel run --token ${CF_TUNNEL_TOKEN}
-  #   environment:
-  #     - TUNNEL_TOKEN=${CF_TUNNEL_TOKEN}
-  #   networks:
-  #     - openclaw_net
-  #   restart: unless-stopped
-  #   profiles:
-  #     - remote-access
+  # Cloudflare Tunnel - 安全遠端訪問
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cf_tunnel
+    command: tunnel run --token ${CF_TUNNEL_TOKEN}
+    environment:
+      - TUNNEL_TOKEN=${CF_TUNNEL_TOKEN}
+    networks:
+      - openclaw_net
+    restart: unless-stopped
+    depends_on:
+      - openclaw
 
 networks:
   openclaw_net:
