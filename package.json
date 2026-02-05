@@ -1,17 +1,17 @@
 {
-  "name": "openclaw-docker-infra",
+  "name": "openclaw-docker",
   "version": "1.0.0",
   "description": "OpenClaw AI Assistant Docker deployment with multi-provider support",
   "author": "explooosion",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/explooosion/openclaw-docker-infra.git"
+    "url": "git+https://github.com/explooosion/openclaw-docker.git"
   },
   "bugs": {
-    "url": "https://github.com/explooosion/openclaw-docker-infra/issues"
+    "url": "https://github.com/explooosion/openclaw-docker/issues"
   },
-  "homepage": "https://github.com/explooosion/openclaw-docker-infra#readme",
+  "homepage": "https://github.com/explooosion/openclaw-docker#readme",
   "keywords": [
     "openclaw",
     "ai-assistant",
